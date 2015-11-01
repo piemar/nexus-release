@@ -40,14 +40,19 @@ public class NexusReleasePublisher extends Recorder {
     private final String nexusUsername;
     private final String nexusUrl;
     private final String nexusPassword;
-
+    private final boolean autoDropAfterRelease;
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public NexusReleasePublisher(String nexusUrl, String nexusUsername, String nexusPassword) {
+    public NexusReleasePublisher(String nexusUrl, String nexusUsername, String nexusPassword, boolean autoDropAfterRelease) {
         this.nexusUsername = nexusUsername;
         this.nexusUrl = nexusUrl;
         this.nexusPassword = nexusPassword;
+        this.autoDropAfterRelease = autoDropAfterRelease;
+    }
+
+    public boolean getAutoDropAfterRelease() {
+        return autoDropAfterRelease;
     }
 
     public String getNexusUsername() {
@@ -127,7 +132,7 @@ public class NexusReleasePublisher extends Recorder {
         private String nexusUsername;
 
         private String nexusPassword;
-
+        private boolean autoDropAfterRelease;
         private String nexusUrl;
         /**
          * In order to load the persisted global configuration, you have to
@@ -175,11 +180,16 @@ public class NexusReleasePublisher extends Recorder {
             nexusUrl = formData.getString("nexusUrl");
             nexusUsername = formData.getString("nexusUsername");
             nexusPassword = formData.getString("nexusPassword");
+            autoDropAfterRelease = formData.getBoolean("autoDropAfterRelease");
 
             // ^Can also use req.bindJSON(this, formData);
             //  (easier when there are many fields; need set* methods for this, like setUseFrench)
             save();
             return super.configure(req, formData);
+        }
+
+        public boolean getAutoDropAfterRelease() {
+            return autoDropAfterRelease;
         }
 
         public String getNexusUsername() {

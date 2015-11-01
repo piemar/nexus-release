@@ -13,12 +13,12 @@ public class NexusReleaseBuildAction implements Action {
 
     @Override
     public String getIconFileName() {
-        return "/plugin/nexus-release/img/build-goals.png";
+        return "/plugin/nexus-release/img/nexus-logo.png";
     }
 
     @Override
     public String getDisplayName() {
-        return "Test Example Build Page";
+        return "Perform Nexus Release";
     }
 
     @Override

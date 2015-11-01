@@ -27,5 +27,10 @@
           <f:password/>
         </f:entry>
 
+       <f:entry title="Drop after release" field="autoDropAfterRelease"
+          description="After the release operation is successful, automatically drop released repositories.  Automatic drop was the default behavior of Nexus 2.3 and earlier.">
+          <f:checkbox name="autoDropAfterRelease" checked="true"/>
+        </f:entry>
+
   </f:section>
 </j:jelly>

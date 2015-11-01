@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by prit8976 on 8/27/15.
+ * Created by piepet on.
  */
 public class NexusReleaseProjectAction implements Action {
 
@@ -55,7 +55,7 @@ public class NexusReleaseProjectAction implements Action {
         }
         return returnStage;
     }
-    public void doSubmit(StaplerRequest req, StaplerResponse resp) throws IOException, ServletException {
+    public void doUpdateStageState(StaplerRequest req, StaplerResponse resp) throws IOException, ServletException {
         StaplerRequestWrapper requestWrapper = new StaplerRequestWrapper(req);
         NexusReleasePublisher.DescriptorImpl descriptor = (NexusReleasePublisher.DescriptorImpl) project.getLastBuild().getDescriptorByName("NexusReleasePublisher");
         String username=requestWrapper.getString("nexusUsername");
@@ -68,13 +68,15 @@ public class NexusReleaseProjectAction implements Action {
             stageClient.checkAuthentication();
             String [] releases=req.getParameterValues("releaseStageID");
             String [] drops=req.getParameterValues("dropStageID");
-            List<Stage> stages = getProjectMessages();
+            List<Stage> stages = getClosedStagingRepositories();
             if(stages!=null) {
                 if(releases!=null) {
                     for (String release : releases) {
                         Stage stageToRelease = lookupByStageId(release, stages);
                         stageClient.releaseStage(stageToRelease);
-
+                        if(descriptor.getAutoDropAfterRelease()){
+                            stageClient.dropStage(stageToRelease);
+                        }
                     }
                 }
                 if (drops != null) {
@@ -193,7 +195,7 @@ public class NexusReleaseProjectAction implements Action {
         }
         return returnValue;
     }
-    public List<Stage> getProjectMessages() {
+    public List<Stage> getClosedStagingRepositories() {
         NexusReleasePublisher.DescriptorImpl descriptor = (NexusReleasePublisher.DescriptorImpl) project.getLastBuild().getDescriptorByName("NexusReleasePublisher");
         List<ParametersAction> parametersActions =project.getLastBuild().getActions(ParametersAction.class);
         List<Stage> stages=null;

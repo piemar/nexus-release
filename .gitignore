@@ -1,6 +1,6 @@
 DE Project Files
 .idea/*
-
+*.iml
 #OSX files
 .DS_Store
 

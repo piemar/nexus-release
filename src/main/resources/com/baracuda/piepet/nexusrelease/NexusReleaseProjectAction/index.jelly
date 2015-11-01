@@ -2,7 +2,7 @@
     <l:layout>
         <st:include it="${it.project}" page="sidepanel.jelly"/>
         <l:main-panel>
-            <j:set var="projectMessages" value="${it.getProjectMessages()}"/>
+            <j:set var="closedStagingRepositories" value="${it.getClosedStagingRepositories()}"/>
 
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
@@ -11,7 +11,7 @@
 .tg .tg-yw4l{vertical-align:top}
 </style>
 
-			<f:form method="post" action="submit">
+			<f:form method="post" action="updateStageState">
 				<f:section title="Perform Nexus Release">
 <table class="tg" style="width: 100%;text-align: center;">
       <tr>
@@ -23,7 +23,7 @@
         <th class="tg-yw4l">Release</th>
         <th class="tg-yw4l">Drop</th>
       </tr>
-    <j:forEach var="projectMessage" items="${projectMessages}">
+    <j:forEach var="projectMessage" items="${closedStagingRepositories}">
       <tr>
         <td class="tg-yw4l">${projectMessage.getGroupId()}</td>
         <td class="tg-yw4l">${projectMessage.getArtifactId()}</td>
