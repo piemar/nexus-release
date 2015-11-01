@@ -391,9 +391,10 @@ public class StageClient {
 				Node profileId = (Node) evaluateXPath("./profileId", stageRepo, XPathConstants.NODE);
 				Node repoId = (Node) evaluateXPath("./repositoryId", stageRepo, XPathConstants.NODE);
 				Node releaseRepositoryId = (Node) evaluateXPath("./releaseRepositoryId", stageRepo, XPathConstants.NODE);
+				Node repositoryURI = (Node) evaluateXPath("./repositoryURI", stageRepo, XPathConstants.NODE);
 				Node description = (Node) evaluateXPath("./description", stageRepo, XPathConstants.NODE);
 				GAV gav=new GAV(description.getTextContent());
-				stages.add(new Stage(profileId.getTextContent(), repoId.getTextContent(),releaseRepositoryId.getTextContent(),gav.getGroupId(),gav.getArtifactId(),gav.getVersion()));
+				stages.add(new Stage(profileId.getTextContent(), repoId.getTextContent(),releaseRepositoryId.getTextContent(),gav.getGroupId(),gav.getArtifactId(),gav.getVersion(),repositoryURI.getTextContent()));
 			}
 		}
 		return stages;
@@ -422,9 +423,11 @@ public class StageClient {
 				Node profileId = (Node) evaluateXPath("./profileId", stageRepo, XPathConstants.NODE);
 				Node repoId = (Node) evaluateXPath("./repositoryId", stageRepo, XPathConstants.NODE);
 				Node releaseRepositoryId = (Node) evaluateXPath("./releaseRepositoryId", stageRepo, XPathConstants.NODE);
+				Node repositoryURI = (Node) evaluateXPath("./repositoryURI", stageRepo, XPathConstants.NODE);
+
 				Node description = (Node) evaluateXPath("./description", stageRepo, XPathConstants.NODE);
 				GAV gav=new GAV(description.getTextContent());
-				stages.add(new Stage(profileId.getTextContent(), repoId.getTextContent(),releaseRepositoryId.getTextContent(),gav.getGroupId(),gav.getArtifactId(),gav.getVersion()));
+				stages.add(new Stage(profileId.getTextContent(), repoId.getTextContent(),releaseRepositoryId.getTextContent(),gav.getGroupId(),gav.getArtifactId(),gav.getVersion(),repositoryURI.getTextContent()));
 			}
 		}
 		return stages;

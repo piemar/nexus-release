@@ -34,13 +34,14 @@ public class Stage {
 	private String groupId;
 	private String version;
 	private String releaseRepositoryId;
+	private String repositoryURI;
 	/**
 	 * Construct a new Stage to represent a Nexus Professional Staging repository.
 	 * 
 	 * @param profileID the id of the staging profile that this stage is associated with.
 	 * @param stageID the id for this stage repository.
 	 */
-	public Stage(String profileID, String stageID,String releaseRepositoryId, String artifactId, String groupdId, String version ) {
+	public Stage(String profileID, String stageID,String releaseRepositoryId, String artifactId, String groupdId, String version,String repositoryURI ) {
 		super();
 		this.profileID = profileID;
 		this.stageID = stageID;
@@ -48,6 +49,11 @@ public class Stage {
 		this.artifactId = artifactId;
 		this.groupId =groupdId;
 		this.version=version;
+		this.repositoryURI = repositoryURI;
+	}
+
+	public String getRepositoryURI() {
+		return repositoryURI;
 	}
 
 	public String getReleaseRepositoryId() {

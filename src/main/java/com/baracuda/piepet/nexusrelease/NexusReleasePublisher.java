@@ -72,8 +72,8 @@ public class NexusReleasePublisher extends Recorder {
         boolean isSuccessful=false;
         try {
 
-            NexusReleaseBuildAction buildAction = new NexusReleaseBuildAction("", build);
-            build.addAction(buildAction);
+            //NexusReleaseBuildAction buildAction = new NexusReleaseBuildAction("", build);
+            //build.addAction(buildAction);
             build.addAction(initNexusParameters(build));
             isSuccessful=true;
         } catch (IOException e) {

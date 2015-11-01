@@ -73,9 +73,11 @@ public class NexusReleaseProjectAction implements Action {
                 if(releases!=null) {
                     for (String release : releases) {
                         Stage stageToRelease = lookupByStageId(release, stages);
-                        stageClient.releaseStage(stageToRelease);
-                        if(descriptor.getAutoDropAfterRelease()){
-                            stageClient.dropStage(stageToRelease);
+                        if(stageToRelease!=null) {
+                            stageClient.releaseStage(stageToRelease);
+                            if (descriptor.getAutoDropAfterRelease()) {
+                                stageClient.dropStage(stageToRelease);
+                            }
                         }
                     }
                 }
@@ -83,7 +85,9 @@ public class NexusReleaseProjectAction implements Action {
 
                     for (String drop : drops) {
                         Stage stageToDrop = lookupByStageId(drop, stages);
-                        stageClient.dropStage(stageToDrop);
+                        if(stageToDrop!=null) {
+                            stageClient.dropStage(stageToDrop);
+                        }
                     }
                 }
             }

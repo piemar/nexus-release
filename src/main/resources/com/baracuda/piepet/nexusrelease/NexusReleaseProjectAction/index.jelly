@@ -28,13 +28,14 @@
         <td class="tg-yw4l">${projectMessage.getGroupId()}</td>
         <td class="tg-yw4l">${projectMessage.getArtifactId()}</td>
         <td class="tg-yw4l">${projectMessage.getVersion()}</td>
-        <td class="tg-yw4l">${projectMessage.getStageID()}</td>
+        <td class="tg-yw4l"><a href="${projectMessage.repositoryURI}" target="_blank">${projectMessage.getStageID()}</a></td>
         <td class="tg-yw4l"><input type="checkbox" name="releaseStageID" value="${projectMessage.getStageID()}"/></td>
         <td class="tg-yw4l"><input type="checkbox" name="dropStageID" value="${projectMessage.getStageID()}"/></td>
       </tr>
     </j:forEach>
 </table>
-
+</f:section>
+				<f:section title="User credentials">
 
 						<f:entry title="Username">
 							<f:textbox name="nexusUsername" value="" />
@@ -43,10 +44,11 @@
 							<f:password name="nexusPassword" value="" />
 						</f:entry>
 			</f:section>
+                <table style="width:100%">
      			<tr><td colspan="4" align="right">
 				<f:submit value="${%Perform Nexus Release}"/>
 				</td></tr>
-
+                </table>
             </f:form>
             </l:main-panel>
 
