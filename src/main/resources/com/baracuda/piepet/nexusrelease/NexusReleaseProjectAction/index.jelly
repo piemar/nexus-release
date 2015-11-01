@@ -1,0 +1,54 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:l="/lib/layout" xmlns:f="/lib/form">
+    <l:layout>
+        <st:include it="${it.project}" page="sidepanel.jelly"/>
+        <l:main-panel>
+            <j:set var="projectMessages" value="${it.getProjectMessages()}"/>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
+.tg .tg-yw4l{vertical-align:top}
+</style>
+
+			<f:form method="post" action="submit">
+				<f:section title="Perform Nexus Release">
+<table class="tg" style="width: 100%;text-align: center;">
+      <tr>
+
+        <th class="tg-yw4l">GroupId</th>
+        <th class="tg-yw4l">ArtifactId</th>
+        <th class="tg-yw4l">Version</th>
+        <th class="tg-yw4l">StageId</th>
+        <th class="tg-yw4l">Release</th>
+        <th class="tg-yw4l">Drop</th>
+      </tr>
+    <j:forEach var="projectMessage" items="${projectMessages}">
+      <tr>
+        <td class="tg-yw4l">${projectMessage.getGroupId()}</td>
+        <td class="tg-yw4l">${projectMessage.getArtifactId()}</td>
+        <td class="tg-yw4l">${projectMessage.getVersion()}</td>
+        <td class="tg-yw4l">${projectMessage.getStageID()}</td>
+        <td class="tg-yw4l"><input type="checkbox" name="releaseStageID" value="${projectMessage.getStageID()}"/></td>
+        <td class="tg-yw4l"><input type="checkbox" name="dropStageID" value="${projectMessage.getStageID()}"/></td>
+      </tr>
+    </j:forEach>
+</table>
+
+
+						<f:entry title="Username">
+							<f:textbox name="nexusUsername" value="" />
+						</f:entry>
+						<f:entry title="Password">
+							<f:password name="nexusPassword" value="" />
+						</f:entry>
+			</f:section>
+     			<tr><td colspan="4" align="right">
+				<f:submit value="${%Perform Nexus Release}"/>
+				</td></tr>
+
+            </f:form>
+            </l:main-panel>
+
+    </l:layout>
+</j:jelly>
